@@ -1,0 +1,117 @@
+
+
+
+<!-- Data Table -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
+<script type="text/javascript" charset="utf8"
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Data Table -->
+<%-include('../partials/admin-header.ejs')-%>
+
+<section class="content-main">
+  <div class="content-header">
+    <div>
+      <h2 class="content-title card-title">Order Management.</h2>
+      <p>Manage Orders</p>
+    </div>
+    
+  </div>
+  <div class="card mb-4">
+    <header class="card-header">
+      <div class="row gx-3">
+       
+        
+       
+      </div>
+    </header>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover" id="productsTable">
+          <thead>
+            <tr>
+              <th>#ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Payment Method</th>
+              <th scope="col">Status</th>
+              <th scope="col">Date</th>
+              <th scope="col" class="text-end">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% orders.forEach(function(order) { %>
+            <tr>
+              <td><%= order._id %></td>
+              <td><b><%= order.address.full_name %></b></td>
+              <td>&#x20B9;<%= order.total_amount %></td>
+              <td><%= order.payment_method %></td>
+              <td>
+                <% if (order.order_status === "Placed") { %>
+                <span class="badge rounded-pill bg-primary">
+                  <%= order.order_status %>
+                </span>
+                <% } else if (order.order_status === "Shipped") { %>
+                <span class="badge rounded-pill bg-success">
+                  <%= order.order_status %>
+                </span>
+                <% } else if (order.order_status === "Delivered") { %>
+                <span class="badge rounded-pill bg-info">
+                  <%= order.order_status %>
+                </span>
+                <% } else if (order.order_status === "Cancelled") { %>
+                <span class="badge rounded-pill bg-danger">
+                  <%= order.order_status %>
+                </span>
+                <% } else if (order.order_status === "Returned") { %>
+                <span class="badge rounded-pill bg-warning">
+                  <%= order.order_status %>
+                </span>
+                <% } else if (order.order_status === "Payment Pending") {%>
+                  <span class="badge rounded-pill bg-warning">
+                    <%= order.order_status %>
+                  </span>
+                <% } %>
+                
+              </td>
+              <td>
+                <%= new Date(order.order_date).toLocaleString('en-US', {
+                dateStyle: 'short', timeStyle: 'short' }) %>
+              </td>
+              <td class="text-end">
+                <a
+                  href="/admin/view-order/<%= order._id %>"
+                  class="btn btn-md rounded font-sm"
+                  >View Order</a
+                >
+              </td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="pagination-area mt-15 mb-50">
+    <nav aria-label="Page navigation example">
+      
+    </nav>
+  </div>
+</section>
+
+<%-include('../partials/admin-footer.ejs')-%>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+<script>
+  $(document).ready( function () {
+    $('#productsTable').DataTable();
+});
+</script>
+
+<!-- data table cdn -->
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+<script src="/assets/js/vendors/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap4.min.js"></script>
+<!-- data table cdn -->

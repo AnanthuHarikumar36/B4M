@@ -1,0 +1,150 @@
+<!-- Data Table -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap4.min.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css"
+/>
+<script
+  type="text/javascript"
+  charset="utf8"
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"
+></script>
+
+<!-- Data Table -->
+
+<%-include('../partials/admin-header.ejs')-%>
+<section class="content-main">
+  <!-- existing code here -->
+
+
+  <div class="content-header">
+    <div>
+      <h2 class="content-title card-title">Products List.</h2>
+      <p>View Products, Edit and Delete</p>
+    </div>
+    <div>
+      <a href="/admin/add-products" class="btn btn-primary btn-sm rounded"
+        >Add</a
+      >
+    </div>
+  </div>
+  <div class="card mb-4">
+    
+    <div class="card-body">
+      <table id="productsTable" class="table table-hover display">
+        <thead>
+          <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price</th>
+            <th scope="col">Status</th>
+            <th scope="col" class="text-end">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% products.forEach(product => { %>
+            <tr>
+              <td>
+                <div class="left">
+                  <img
+                    src="<%= product.productImage[0] %>"
+                    class="img-sm"
+                    alt="product Image"
+                  />
+                </div>
+              </td>
+              <td>
+                <div class="info">
+                  <h6 class="mb-0"><%= product.productName %></h6>
+                </div>
+              </td>
+              <td>
+                <span><%= product.productDescription.slice(0,50) %>...</span>
+              </td>
+              <td>
+                <div class="col-price">
+                  <span>&#x20B9;<%= product.productPrice %></span>
+                </div>
+              </td>
+              <% if (product.productStatus === 'listed') { %>
+                <td>
+                  <div class="col-status">
+                    <a class="badge rounded-pill alert-success" onclick="unlistProduct('<%= product._id %>')"><%= product.productStatus %></a>
+                  </div>
+                </td>
+              <% } else { %>
+                <td>
+                  <div class="col-status">
+                    <button class="badge rounded-pill alert-danger"><%= product.productStatus %></button>
+                  </div>
+                </td>
+              <% } %>
+              <td>
+                <div class="col-dropdown text-end">
+                  <a href="/admin/edit-product/<%= product._id %>" class="btn btn-md rounded font-sm">Edit</a>
+                  <!-- <% if (product.productStatus === 'Listed') { %>
+                    <a href="" class="btn btn-danger font-sm" onclick="unlistProduct('<%= product._id %>');event.preventDefault();">Unlist</a>
+                  <% } %> -->
+                </div>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+
+</section>
+<%-include('../partials/admin-footer.ejs')-%>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+<script>
+
+function unlistProduct(id) {
+  console.log('runnnnn');
+  Swal.fire({
+    title: `Are you sure you want to unlist product?`,
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonText: "Yes",
+    cancelButtonText: "No",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url: `/admin/unlist-product/${id}`,
+        method: "get",
+        success: (response) => {
+          location.reload();
+        },
+        error: (error) => {
+          console.log(`Error: ${error}`);
+        },
+      });
+    }
+  });
+}
+
+</script>
+
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#productsTable").DataTable();
+  });
+  
+</script>
+<!-- data table cdn -->
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+<script src="/assets/js/vendors/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap4.min.js"></script>
+<!-- data table cdn -->

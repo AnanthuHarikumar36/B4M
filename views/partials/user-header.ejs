@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- 
+    - primary meta tag
+  -->
+  <title>B4M - Get Quality Bags</title>
+  <meta name="title" content="Woodex - Get Quality Furniture">
+  <meta name="description" content="This is an eCommerce html template made by codewithsadee">
+
+  <!-- 
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+
+  <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="../userAssets/stylesheets/style.css">
+
+  <!-- 
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mr+De+Haviland&family=Roboto:wght@400;500;700&display=swap"
+    rel="stylesheet">
+
+  <!-- banner slider link-->
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+ 
+  <!-- 
+    - preload images
+  -->
+  <link rel="preload" as="image" href="../userAssets/images/hero-product-1.jpg">
+  <link rel="preload" as="image" href="../userAssets/images/hero-product-2.jpg">
+  <link rel="preload" as="image" href="../userAssets/images/hero-product-3.jpg">
+  <link rel="preload" as="image" href="../userAssets/images/hero-product-4.jpg">
+  <link rel="preload" as="image" href="../userAssets/images/hero-product-5.jpg">
+
+  <link rel="stylesheet" href="../userAssets/style.css">
+
+</head>
+
+<script src="../userAssets/javascripts/script.js" defer></script>
+
+
+<!-- icon link -->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<style>
+  .header a {
+   color: black;
+   text-decoration: none;
+   
+}
+.header a:hover{
+   color: black;
+   text-decoration: none;
+   
+}
+</style>
+<header class="header" data-header>
+  <div class="container">
+
+    <div class="input-wrapper">
+      <form action="/product-search/?search"  method="get">
+      <input type="search" name="search" placeholder="Search Anything..." class="input-field"  id="product-search"/>
+      <button type="submit" onclick="return validateForm()">
+      <ion-icon name="search-outline"aria-hidden="true" ></ion-icon></button>
+  </form>
+  </div>
+
+    <a href="/" class="logo" >B4M</a>
+
+    <div class="header-action">
+      <div>
+        <%if(user){%>
+        <%=user.name%>
+        <%}%>
+      </div>
+      
+      <div class="dropdown" >
+        <a href="/login">
+          <button class="header-action-btn">
+            <ion-icon name="person-outline" aria-hidden="true" id="user-btn"></ion-icon>
+        </a>
+        </button>
+        <% if(user) { %>
+        <div class="dropdown-content">
+          <a href="order">Orders</a>
+          <a href="/address">Address</a>
+          <a href="/wallet">Wallet</a>
+          <a href="/wishlist">wishlist</a>
+          <a href="/logout">Logout</a>
+        </div>
+        <% } %>
+      </div>
+
+
+
+      <button class="header-action-btn" aria-label="favorite list">
+        <% if(user) {%>
+        <a href="/wishlist">
+        <ion-icon name="heart-outline" aria-hidden="true"></ion-icon></a>
+        <% }else {%>
+            <a href="/login">
+                <ion-icon name="heart-outline" aria-hidden="true"></ion-icon></a>
+            <% } %>
+    <% if(user) {%>
+        <span class="wishlist-count btn-badge"><%= user.wish %></span>
+        <% } else { %>
+            <span class="btn-badge">0</span>
+         <% } %>
+    </button>
+
+
+
+
+    <button class="header-action-btn" aria-label="cart">
+      <a href="/cart">
+      <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon></a>
+
+      <% if(user) { %>
+        <span class="btn-badge"><%= user.count %></span>
+      <% } else { %>
+        <span class="btn-badge">0</span>
+      <% } %>
+    </button>
+
+
+    
+    </div>
+
+  </div>
+</header>
+
+</html>
+
+
+<script>
+  function validateForm() {
+      var searchInput = document.getElementById("product-search").value;
+      if (searchInput == "") {
+        return false;
+      } else {
+        return true;
+      }
+  
+    }
+    </script>
+
+

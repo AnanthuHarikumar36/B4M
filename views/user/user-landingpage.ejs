@@ -1,0 +1,465 @@
+<%- include('../partials/user-header')-%>
+
+
+  <!-- <body id="top">
+ 
+      - #SIDEBAR
+    -->
+
+    <div class="sidebar" data-navbar>
+
+      <button class="nav-close-btn" aria-label="close menu" data-nav-toggler>
+        <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+      </button>
+
+      <div class="wrapper">
+
+        <ul class="sidebar-list">
+
+          <li>
+            <p class="sidebar-list-title">Language</p>
+          </li>
+
+          <li>
+            <a href="#" class="sidebar-link">English</a>
+          </li>
+
+          <li>
+            <a href="#" class="sidebar-link">French</a>
+          </li>
+
+          <li>
+            <a href="#" class="sidebar-link">Arabric</a>
+          </li>
+
+        </ul>
+
+        <ul class="sidebar-list">
+
+          <li>
+            <p class="sidebar-list-title">Currency</p>
+          </li>
+
+          <li>
+            <a href="#" class="sidebar-link">USD - US Dollar</a>
+          </li>
+
+          <li>
+            <a href="#" class="sidebar-link">Euro</a>
+          </li>
+
+          <li>
+            <a href="#" class="sidebar-link">Pound</a>
+          </li>
+
+        </ul>
+
+      </div>
+
+      <nav class="navbar">
+        <ul class="navbar-list">
+
+          <li class="navbar-item">
+            <a href="#home" class="navbar-link" data-nav-link>Home</a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="#about" class="navbar-link" data-nav-link>About</a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="#product" class="navbar-link" data-nav-link>Product</a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="#blog" class="navbar-link" data-nav-link>Blogs</a>
+          </li>
+
+        </ul>
+      </nav>
+
+      <ul class="contact-list">
+
+        <li>
+          <p class="contact-list-title">Contact Us</p>
+        </li>
+
+        <li class="contact-item">
+          <address class="address">
+            69 Halsey St, Ny 10002, New York, United States
+          </address>
+        </li>
+
+        <li class="contact-item">
+          <a href="mailto:support.center@woodex.co" class="contact-link">support.center@woodex.co</a>
+        </li>
+
+        <li class="contact-item">
+          <a href="tel:00001235567890" class="contact-link">(0000) 1235 567890</a>
+        </li>
+
+      </ul>
+
+      <div class="social-wrapper">
+
+        <p class="social-list-title">Follow US On Socials</p>
+
+        <ul class="social-list">
+
+          <li>
+            <a href="#" class="social-link">
+              <ion-icon name="logo-facebook"></ion-icon>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="social-link">
+              <ion-icon name="logo-twitter"></ion-icon>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="social-link">
+              <ion-icon name="logo-tumblr"></ion-icon>
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+    <div class="overlay" data-overlay data-nav-toggler></div>
+
+    <main>
+      <article>
+        <section class="hero">
+          <div class="hero__slider owl-carousel owl-theme">
+              <% banners.forEach(function (banner) { %>
+              <div class="hero__item" style="background-image: url('<%=banner.image %>')">
+                  <div class="container">
+                      <div class="row">
+                          <div class="col-lg-7 col-md-8">
+                              <div class="hero__text">
+                                  <h2><%=banner.headline %></h2>
+                                  <p><%=banner.additionalInfo %></p>
+                                  <a href="#product" class="primary-btn">Shop now<i class="fa fa-long-arrow-right"></i></a>
+                                  <div class="hero__social">
+                                      <a href="#"><i class="fa fa-facebook"></i></a>
+                                      <a href="#"><i class="fa fa-twitter"></i></a>
+                                      <a href="#"><i class="fa fa-pinterest"></i></a>
+                                      <a href="#"><i class="fa fa-instagram"></i></a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <% }) %>
+          </div>
+      </section>
+  
+
+      <section class="section category" id="category" aria-label="category">
+        <div class="container">
+            <h2 class="section-title">Categories</h2>
+        </div>
+    </section>
+    <section>
+    <div class="container">
+        <ul class="hero-list">
+            <li>
+                <div class="hero-card">
+                    <a href="productsList?category=64460f316b111b3afced48c2">
+                    <figure class="card-banner img-holder" style="--width: 285; --height: 396">
+                        <img
+                            src="../userAssets/images/photo-1611010344444-5f9e4d86a6e1.jpeg"
+                            width="285"
+                            height="396"
+                            alt="Art Deco Home"
+                            class="img-cover"
+                            
+                        />
+                    </figure>
+
+                    <div class="card-content">
+                        <h3>
+                            <a href="productsList?category=64460f316b111b3afced48c2" class="card-title">Back Bags</a>
+                        </h3>
+
+                        <p class="card-text">Explore with Us</p>
+                    </div>
+                </div>
+            </a>
+            </li>
+            <li class="colspan-2">
+              <a href="productsList?category=644796379a78ac210ab9f118">
+
+                <div class="hero-card">
+                    <figure class="card-banner img-holder" style="--width: 568; --height: 389">
+                        <img
+                            src="../userAssets/images/lucas-favre-5B-I62BwJ5E-unsplash.jpg"
+                            width="568"
+                            height="389"
+                            alt="Helen Chair"
+                            class="img-cover"
+                        />
+                    </figure>
+
+                    <div class="card-content">
+                        <h3>
+                          <a href="productsList?category=644796379a78ac210ab9f118" class="card-title">Traveling Bags</a>
+                        </h3>
+
+                        <p class="card-text">Go eco Friendly</p>
+                    </div>
+                </div>
+            </a>
+            </li>
+
+            <li>
+                <a href="productsList?category=64460ec36b111b3afced48be">
+                <div class="hero-card">
+                    <figure class="card-banner img-holder" style="--width: 285; --height: 396">
+                        <img
+                            src="../userAssets/images/andrea-natali-jdTtkmr1axk-unsplash.jpg"
+                            width="285"
+                            height="396"
+                            alt="Vase Of Flowers"
+                            class="img-cover"
+                        />
+                    </figure>
+
+                    <div class="card-content">
+                        <h3>
+                            <a href="productsList?category=64460ec36b111b3afced48be" class="card-title">Laptop Bags</a>
+                        </h3>
+
+                        <p class="card-text">Decoration</p>
+                    </div>
+                </div>
+            </a>
+            </li>
+
+            <li class="colspan-2"></li>
+
+            <li class="colspan-2"></li>
+        </ul>
+    </div>
+</section>
+
+
+        <!-- 
+          - #ABOUT
+        -->
+
+        <section class="section about" id="about" aria-label="about">
+          <div class="container">
+
+            <h2 class="section-title">Bringing the vibrant Indian culture to the modern world</h2>
+
+            <p class="section-text">
+              Bag For Men effortlessly defines a modern Indian classic. Bringing together the contemporary and the traditional,
+             B4M weaves subtle elegance into your lifestyle.
+            </p>
+
+            <div class="about-card">
+              <figure class="card-banner img-holder" style="--width: 1170; --height: 450;">
+                <img src="../userAssets/images/black-friday-sale-facebook-cover-design-template_691550-71.jpg" width="1170" height="450" loading="lazy"
+                  alt="Woodex promo" class="img-cover">
+              </figure>
+
+              <button class="play-btn" aria-label="play video">
+                <ion-icon name="play-circle-outline" aria-hidden="true"></ion-icon>
+              </button>
+            </div>
+
+          </div>
+        </section>
+        <!-- 
+          - #PRODUCTS
+        -->
+
+        <section class="section product" id="product" aria-label="product">
+          <div class="container">
+            <div class="title-wrapper">
+              <h2 class="h2 section-title">Popular Products</h2>
+              <ul class="filter-btn-list">
+              <% category.forEach(function(category) { %>
+                <%if(category.isListed){%>
+                <li class="filter-btn-item">
+                  <button class="filter-btn active" data-filter-btn="all"><%=category.CategoryName %></button>
+                </li>
+                <%}%>
+                <% }) %>        
+              </ul>
+            </div>
+            <ul class="grid-list product-list" data-filter="all">
+              <% products.forEach(function(product) { %>         
+                <li class="decoration">
+                  <div class="product-card">
+                    <a href="/product-view/<%=product.slug%>" class="card-banner img-holder has-before" style="--width: 300; --height: 300;">
+                      <img src="<%= product.productImage[0] %>" width="300" height="300" loading="lazy"
+                        alt="Animi Dolor Pariatur" class="img-cover">
+                      <ul class="card-action-list">
+                        <li>
+                          <button class="card-action-btn" aria-label="add to cart" title="add to cart">
+                            <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
+                          </button>
+                        </li>
+                        <li>
+                          <button class="card-action-btn" aria-label="add to cart" title="add to cart">
+                            <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
+                          </button>
+                        </li>
+                        <li>
+                          <button class="card-action-btn" aria-label="add to whishlist" title="add to whishlist">
+                            <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
+                          </button>
+                        </li>
+                      </ul>
+                      <% if (product.productQuantity==0) { %>
+                        <div class="card-badge">Out of Stock</div>
+                        <% }%>
+                    </a>
+                    <div class="card-content">
+                      <h3 class="h3"><%=product.productModel%>
+                        <a href="/product-view/<%=product.slug%>" class="card-title"><%=product.productName.slice(0,35)%></a>
+                      </h3>
+                      <div class="card-price">
+                        <a href="#" class="price" value="21"><%=product.category.CategoryName %></a>
+                      </div>
+                      <h3 class="h5">&#x20B9;<%=product.productPrice%>
+                      </h5>
+                      <span class="text"><%=product.reviews%></span>
+                    </div>
+                  </div>
+                </li>
+              <% }) %>
+            </ul>
+          </div>
+        </section>
+      </article>
+    </main>
+    <!-- 
+      - #FOOTER
+    -->
+
+    <a href="#top" class="back-top-btn" aria-label="back to top" data-back-top-btn>
+      <ion-icon name="arrow-up" aria-hidden="true"></ion-icon>
+    </a>
+
+
+    <!-- Initialize Owl Carousel -->
+    <script>
+      $(document).ready(function () {
+          $(".hero__slider").owlCarousel({
+              loop: true,
+              items: 1,
+              nav: true,
+              dots: false
+          });
+      });
+  </script>
+
+
+
+
+    <!-- 
+      - custom js link
+    -->
+    <script src="../userAssets/javascripts/script.js" defer></script>
+
+    <!-- 
+      - ionicon link
+     -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  </body>
+
+  <%- include('../partials/user-footer')-%>
+  <style>
+    .hero {
+  position: relative;
+}
+
+.hero__slider {
+  position: relative;
+}
+
+.hero__item {
+  height: calc(100vh - 80px); /* Subtract the height of the header element */
+  min-height: 500px; /* Set a minimum height to ensure content is visible */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+}
+
+.hero__item h2 {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #ffffff;
+  margin-bottom: 20px;
+  max-width: 800px;
+}
+
+.hero__item p {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #ffffff;
+  margin-bottom: 40px;
+  max-width: 800px;
+}
+
+.hero__item .primary-btn {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #ffffff;
+  background-color: #f04343;
+  padding: 20px 40px;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+.hero__item .primary-btn:hover {
+  background-color: #000000;
+}
+
+@media (max-width: 767px) {
+  .hero__item h2 {
+    font-size: 36px;
+  }
+
+  .hero__item p {
+    font-size: 18px;
+  }
+
+  .hero__item .primary-btn {
+    font-size: 14px;
+    padding: 15px 30px;
+    border-radius: 20px;
+  }
+}
+
+@media (min-aspect-ratio: 4/3) {
+  .hero__item {
+    background-position: left center;
+  }
+}
+
+@media (min-aspect-ratio: 16/9) {
+  .hero__item {
+    background-position: center top;
+  }
+}
+  </style>

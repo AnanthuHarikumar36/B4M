@@ -1,0 +1,273 @@
+
+<%-include("../partials/productListHeader.ejs")  %>
+<%-include('../partials/user-header.ejs') %>
+    <section class="shop spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="shop__sidebar">
+                        
+                        <div class="shop__sidebar__accordion">
+                            <div class="accordion" id="accordionExample">
+                                <div class="card">
+                                    <div class="card-heading">
+                                        <a data-toggle="collapse" data-target="#collapseOne">Categories</a>
+                                    </div>
+                                    <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="shop__sidebar__categories">
+                                                <ul class="nice-scroll">
+                                                    <li>
+                                                        <a href="productsList?category=64460ec36b111b3afced48be">Laptop Bag</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="productsList?category=64460f316b111b3afced48c2">Back Bag</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="productsList?category=644796379a78ac210ab9f118">Traveling Bag</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="shop__product__option">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="shop__product__option__left">
+                                    <p></p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="shop__product__option__right">
+                                    <p>Sort by Price:</p>
+                                    <select
+                                        name="sortby"
+                                        id="sortby"
+                                        class="form-control"
+                                        class="form-select"
+                                        onchange="handleChange(event)"
+                                    >
+                                        <option value="">Low To High</option>
+                                        <option value="">$0 - $55</option>
+                                        <option value="">$55 - $100</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <% products.forEach(function (product,index){ %>
+
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="img/product/product-14.jpg">
+                                    <ul class="">
+                                        <li>
+                                            <a href="/product-view/<%=product.slug%>"
+                                                ><img src="<%= product?.productImage[0] %>" alt="" style="width: 260px; height: 260px;"
+                                            /></a>
+                                        </li>
+                                        <!-- <li>
+                                            <a href="#"><img src="<%= product?.productImage[1] %>" alt="" /> <span>Compare</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><img src="<%= product?.productImage[2] %>" alt="" /></a>
+                                        </li> -->
+                                    </ul>
+                                </div>
+
+                                <div class="product__item__text">
+                                    <h6><%= product.productName%></h6>
+                                    <% if (product.productQuantity==0) { %>
+                                    <div class="add-cart" style="color: red">Out of Stock</div>
+                                    <% }else{%> <% if (product?.isInCart) { %>
+                                    <a href="/cart" class="add-cart">view Cart</a>
+                                    <% }else{ %>
+
+                                    <a
+                                        href="#"
+                                        class="add-cart"
+                                        onclick="addToCart('<%=product?._id %>', '<%=user?._id %>'); return false;"
+                                        >+ Add To Cart</a
+                                    >
+                                    <%}%> <%}%>
+                                    <div class="rating">
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </div>
+                                    <h5> &#x20B9; <%= product.productPrice %></h5>
+                                    <!-- <div class="product__color__select">
+                                        <label for="pc-40">
+                                            <input type="radio" id="pc-40" />
+                                        </label>
+                                        <label class="active black" for="pc-41">
+                                            <input type="radio" id="pc-41" />
+                                        </label>
+                                        <label class="grey" for="pc-42">
+                                            <input type="radio" id="pc-42" />
+                                        </label>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <%})%>
+                    </div>
+                    <!-- <div class="row">
+                        <div class="col-lg-12">
+                            <div class="product__pagination">
+                                <a class="active" href="#">1</a>
+                                <a href="#">2</a>
+                                <a href="#">3</a>
+                                <span>...</span>
+                                <a href="#">21</a>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <%-include('../partials/user-footer') -%>
+
+    <%-include("../partials/productListFooter.ejs") %>
+
+    <script>
+        // const CategoryId = "<%= products[0]?.category._id %>";
+
+        // function handleChange(event) {
+        //     const selectedOption = event.target.value;
+        //     console.log(selectedOption);
+        //     window.location.href = `/productsList?category=${CategoryId}&sort=${selectedOption}`;
+        // }
+
+        // const priceSlider = document.querySelector("#price-slider");
+        // const priceRange = document.querySelector("#filter-price-range");
+
+        // noUiSlider.create(priceSlider, {
+        //     start: [0, 50000], // Set initial range values
+        //     connect: true, // Display a colored bar between the handles
+        //     range: {
+        //         // Set minimum and maximum values for the slider
+        //         min: 0,
+        //         max: 50000,
+        //     },
+        // });
+        // // Update the price range text when the slider is moved
+        // priceSlider.noUiSlider.on("update", function (values, handle) {
+        //     priceRange.textContent = values.join(" - ");
+        //     // Call a function to update the product list based on the new price range
+        //     updateProducts(values[0], values[1]);
+        // });
+
+        // function updateProducts(minPrice, maxPrice) {
+        //     // Get all product cards on the page
+        //     const productCards = document.querySelectorAll(".product-card");
+        //     console.log(productCards);
+        //     // Loop through all product cards and hide those that do not fall within the specified price range
+        //     productCards.forEach((card) => {
+        //         const price = parseInt(card.dataset.price);
+        //         if (parseInt(price) < minPrice || parseInt(price) > maxPrice) {
+        //             card.style.display = "none";
+        //         } else {
+        //             card.style.display = "block";
+        //         }
+        //     });
+        // }
+
+        function addToCart(productId, userId) {
+            if (userId) {
+                $.get(`/add-to-cart/${productId}`)
+                    .done(function (response) {
+                        if (response.status) {
+                            Swal.fire({
+                                title: "Product added to cart!",
+                                icon: "success",
+                                confirmButtonText: "OK",
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                }
+                            });
+                            return;
+                        }
+                        Swal.fire({
+                            title: "Out of stock!",
+                            icon: "success",
+                            confirmButtonText: "OK",
+                        });
+                    })
+                    .fail(function (error) {
+                        console.log(error);
+                    });
+            } else {
+                // User is not logged in, redirect to login page
+                window.location.href = "/login";
+                return;
+            }
+        }
+    </script>
+
+<script>
+    const CategoryId = "<%= products[0]?.category._id %>";
+
+    function handleChange(event) {
+        const selectedOption = event.target.value;
+        console.log(selectedOption);
+        const url = `/productsList?category=${CategoryId}&sort=${selectedOption}`;
+        window.location.href = url;
+    }
+
+    function sortByPrice(products, sortOption) {
+        switch (sortOption) {
+            case "lowToHigh":
+                return products.sort((a, b) => a.productPrice - b.productPrice);
+            case "0-55":
+                return products.filter(product => product.productPrice >= 0 && product.productPrice <= 55);
+            case "55-100":
+                return products.filter(product => product.productPrice > 55 && product.productPrice <= 100);
+            default:
+                return products;
+        }
+    }
+
+    // Get the initial product list
+    // let products = <%= JSON.stringify(products) %>;
+
+    // Get the sorting select element
+    const sortSelect = document.getElementById("sortby");
+
+    // Add an event listener to the sorting select element
+    sortSelect.addEventListener("change", function (event) {
+        const selectedOption = event.target.value;
+        const sortedProducts = sortByPrice(products, selectedOption);
+
+        // Generate the new HTML for the sorted product list
+        const productListHTML = sortedProducts.map(product => `
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="product__item">
+                    <!-- Rest of the product item HTML here -->
+                </div>
+            </div>
+        `).join('');
+
+        // Update the product list HTML
+        const productList = document.querySelector(".row");
+        productList.innerHTML = productListHTML;
+    });
+</script>
+
+
+    
