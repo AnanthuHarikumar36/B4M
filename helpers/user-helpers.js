@@ -92,11 +92,13 @@ module.exports = {
       const cart = await Cart.findOne({ user: userId }).populate(
         "products.productId"
       );
+      console.log(cart);
       if (!cart || cart.products.length <= 0) {
         return null;
       }
       const cartItems = cart.products.map((item) => {
         const { productId, quantity } = item;
+        console.log(productId);
         const { _id, productName, productModel, productPrice, productImage } =
           productId;
 
