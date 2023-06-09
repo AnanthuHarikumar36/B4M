@@ -11,6 +11,9 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_SECRET,
 });
 
+
+
+
 module.exports = {
   adminlogin: (req, res) => {
     if (req.session.isloggedInad) {
@@ -75,7 +78,7 @@ module.exports = {
   },
   blockUser: async (req, res) => {
     let userId = req.params.id;
-    console.log(userId, "uuuuuuuuuuuuuuuuuuuu");
+
     try {
       await adminHelper.blockUser(userId);
       res.redirect("/admin/view-user");
@@ -95,7 +98,7 @@ module.exports = {
   category: async (_req, res) => {
     try {
       const viewCategory = await adminHelper.getAllCategory();
-      console.log("%%%%%%%%%%11111%%%%%%%%%%");
+
       res.render("admin/category", {
         viewCategory,
       });
@@ -105,7 +108,7 @@ module.exports = {
   },
   addCategory: async (req, res) => {
     try {
-      console.log("%%%%%%%%%%22222222%%%%%%%%%%");
+
       await adminHelper.addCategory(req.body);
       res.redirect("/admin/category");
     } catch (err) {
@@ -116,7 +119,7 @@ module.exports = {
     const { category: categoryName } = req.body;
     const id = req.params.id;
     try {
-      console.log("%%%%%%%%%%333333333%%%%%%%%%%");
+
       await adminHelper.editCategory(categoryName, id);
       res.json({ status: "success" });
     } catch (err) {
@@ -126,7 +129,7 @@ module.exports = {
   deleteCategory: async (req, res) => {
     let categoryId = req.params.id;
     try {
-      console.log("%%%%%%%%%%444444%%%%%%%%%%");
+  
       await adminHelper.deleteCategory(categoryId);
       res.json({ status: "success" });
     } catch (err) {
@@ -234,7 +237,7 @@ module.exports = {
 
       const productImage = results.map((result) => result.secure_url);
 
-      console.log(productImage, "oooooooooooooooooooooooooooo");
+     
       productData.productImage = productImage;
       productData.productStatus = "listed";
 
