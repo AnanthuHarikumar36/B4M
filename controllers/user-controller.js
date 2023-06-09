@@ -336,7 +336,7 @@ module.exports = {
         return;
       }
       const { cartItems: products, subtotal } = items;
-      res.render("user/cart", { user, products, total: subtotal });
+      res.render("user/cartPage", { user, products, total: subtotal });
     } catch (err) {
       res.render("catchError", {
         message: err.message,
