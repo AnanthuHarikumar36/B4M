@@ -361,7 +361,6 @@ module.exports = {
   },
   addCoupon: async (req, res) => {
     try {
-      console.log(req.body);
       res.render("admin/add-coupons");
     } catch (err) {
       console.error(err);
