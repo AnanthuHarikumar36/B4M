@@ -327,7 +327,7 @@ module.exports = {
     try {
       const orders = await adminHelper.getOrderDetails();
       if (orders) {
-        res.render("admin/order-Management", { orders });
+        res.render("admin/order-management", { orders });
       }
     } catch (err) {
       console.error(err);
