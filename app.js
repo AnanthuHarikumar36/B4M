@@ -12,7 +12,7 @@ const { v4: uuid } = require('uuid')
 // var db=require('./config/connection')
 var indexRouter = require('./routes/user');
 var adminRouter = require('./routes/admin');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 
 
 
@@ -36,7 +36,8 @@ app.use(session({
   resave: true,
   saveUninitialized: false
 }))
-app.use(bodyParser.json({ limit: '10mb' }));
+// app.use(bodyParser.json({ limit: '20mb' }));
+app.use(express.json({ limit: '10mb' }));
 
 
 app.use('/', indexRouter);
