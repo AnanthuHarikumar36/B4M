@@ -66,63 +66,70 @@
                     <div class="row">
                         <% products.forEach(function (product,index){ %>
 
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/product-14.jpg">
-                                    <ul class="">
-                                        <li>
-                                            <a href="/product-view/<%=product.slug%>"
-                                                ><img src="<%= product?.productImage[0] %>" alt="" style="width: 260px; height: 260px;"
-                                            /></a>
-                                        </li>
-                                        <!-- <li>
-                                            <a href="#"><img src="<%= product?.productImage[1] %>" alt="" /> <span>Compare</span></a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><img src="<%= product?.productImage[2] %>" alt="" /></a>
-                                        </li> -->
-                                    </ul>
-                                </div>
-
-                                <div class="product__item__text">
-                                    <h6><%= product.productName%></h6>
-                                    <% if (product.productQuantity==0) { %>
-                                    <div class="add-cart" style="color: red">Out of Stock</div>
-                                    <% }else{%> <% if (product?.isInCart) { %>
-                                    <a href="/cart" class="add-cart">view Cart</a>
-                                    <% }else{ %>
-
-                                    <a
-                                        href="#"
-                                        class="add-cart"
-                                        onclick="addToCart('<%=product?._id %>', '<%=user?._id %>'); return false;"
-                                        >+ Add To Cart</a
-                                    >
-                                    <%}%> <%}%>
-                                    <div class="rating">
-                                        <i class="fa fa-star-o"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <i class="fa fa-star-o"></i>
+                          
+                            
+                                
+                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                    <div class="product__item">
+                                        <div class="product__item__pic set-bg" data-setbg="img/product/product-14.jpg">
+                                            <ul class="">
+                                                <li>
+                                                    <a href="/product-view/<%=product.slug%>"
+                                                        ><img src="<%= product?.productImage[0] %>" alt="" style="width: 260px; height: 260px;"
+                                                    /></a>
+                                                </li>
+                                                <!-- <li>
+                                                    <a href="#"><img src="<%= product?.productImage[1] %>" alt="" /> <span>Compare</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><img src="<%= product?.productImage[2] %>" alt="" /></a>
+                                                </li> -->
+                                            </ul>
+                                        </div>
+        
+                                        <div class="product__item__text">
+                                            
+                                            <h6><%= product.productName%></h6>
+                                            <% if (product.productQuantity==0) { %>
+                                            <div class="add-cart" style="color: red">Out of Stock</div>
+                                            <% }else{%> <% if (product?.isInCart) { %>
+                                            <a href="/cart" class="add-cart">view Cart</a>
+                                            <% }else{ %>
+        
+                                            <a
+                                                href="#"
+                                                class="add-cart"
+                                                onclick="addToCart('<%=product?._id %>', '<%=user?._id %>'); return false;"
+                                                >+ Add To Cart</a
+                                            >
+                                            <%}%> <%}%>
+                                            <div class="rating">
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                            </div>
+                                            <h5> &#x20B9; <%= product.productPrice %></h5>
+                                            <!-- <div class="product__color__select">
+                                                <label for="pc-40">
+                                                    <input type="radio" id="pc-40" />
+                                                </label>
+                                                <label class="active black" for="pc-41">
+                                                    <input type="radio" id="pc-41" />
+                                                </label>
+                                                <label class="grey" for="pc-42">
+                                                    <input type="radio" id="pc-42" />
+                                                </label>
+                                            </div> -->
+                                        </div>
                                     </div>
-                                    <h5> &#x20B9; <%= product.productPrice %></h5>
-                                    <!-- <div class="product__color__select">
-                                        <label for="pc-40">
-                                            <input type="radio" id="pc-40" />
-                                        </label>
-                                        <label class="active black" for="pc-41">
-                                            <input type="radio" id="pc-41" />
-                                        </label>
-                                        <label class="grey" for="pc-42">
-                                            <input type="radio" id="pc-42" />
-                                        </label>
-                                    </div> -->
                                 </div>
-                            </div>
-                        </div>
 
-                        <%})%>
+                                <%}%>
+
+                       
+
                     </div>
                     <!-- <div class="row">
                         <div class="col-lg-12">

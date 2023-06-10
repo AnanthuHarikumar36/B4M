@@ -296,7 +296,8 @@
               </ul>
             </div>
             <ul class="grid-list product-list" data-filter="all">
-              <% products.forEach(function(product) { %>         
+              <% products.forEach(function(product) { %>   
+                <%if(product.productStatus=='listed') {%>     
                 <li class="decoration">
                   <div class="product-card">
                     <a href="/product-view/<%=product.slug%>" class="card-banner img-holder has-before" style="--width: 300; --height: 300;">
@@ -336,6 +337,7 @@
                     </div>
                   </div>
                 </li>
+                <%}%>
               <% }) %>
             </ul>
           </div>
