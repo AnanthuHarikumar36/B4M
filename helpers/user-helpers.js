@@ -37,7 +37,6 @@ module.exports = {
     try {
       const User = await userModel.findOne({ number: mobNumber });
       if (User) {
-        console.log(User);
         return User;
       } else {
         return User;
@@ -50,7 +49,6 @@ module.exports = {
     try {
       const User = await userModel.findOne({ _id: id });
       if (User) {
-        console.log(User);
         return User;
       } else {
         return User;
@@ -92,13 +90,11 @@ module.exports = {
       const cart = await Cart.findOne({ user: userId }).populate(
         "products.productId"
       );
-      console.log(cart);
       if (!cart || cart.products.length <= 0) {
         return null;
       }
       const cartItems = cart.products.map((item) => {
         const { productId, quantity } = item;
-        console.log(productId);
         const { _id, productName, productModel, productPrice, productImage } =
           productId;
 
@@ -133,25 +129,20 @@ module.exports = {
         { status: true },
         { image: 1, _id: 0, headline: 1, additionalInfo: 1 }
       );
-      console.log(banners);
       return banners;
     } catch (err) {
       console.error(err);
     }
   },
   addToCart: async (productId, userId) => {
-    console.log(productId, "productid");
-    console.log(userId, "userid");
     try {
       const isProductExist = await Cart.findOne({
         user: userId,
 
         "products.productId": productId,
       });
-      console.log(isProductExist, "llllllllllllllllllllllllll");
 
       if (isProductExist) {
-        console.log(userId, productId, "jjjjjjjjjjjjjjjjjjjjjjj");
 
         await Cart.updateOne(
           { user: userId, "products.productId": productId },
@@ -165,7 +156,6 @@ module.exports = {
         );
       }
     } catch (err) {
-      console.log("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
 
       console.log(err);
     }
@@ -237,7 +227,6 @@ module.exports = {
       }
       // Find the product document
       const productDoc = await Product.findById(product);
-      console.log(productDoc);
       if (!productDoc) {
         throw new Error("Product not found");
       }
@@ -246,7 +235,6 @@ module.exports = {
       const productIndex = cartDoc.products.findIndex(
         (p) => p.productId.toString() === product
       );
-      // console.log(productIndex);
 
       if (productIndex === -1) {
         throw new Error("Product not found in cart");
@@ -534,7 +522,6 @@ module.exports = {
         .populate("items.product_id")
         .exec();
       if (orders.length === 0) {
-        console.log("No orders found for user", userId);
       }
       return orders;
     } catch (err) {
@@ -542,7 +529,6 @@ module.exports = {
     }
   },
   cancelOrder: async (orderId) => {
-    console.log("order id:", orderId);
     try {
       await Order.updateOne(
         { _id: orderId },
@@ -551,25 +537,21 @@ module.exports = {
 
       // Retrieve updated order
       const order = await Order.findOne({ _id: orderId });
-      console.log("+++++++++++++++++++++++++", order);
 
       // Retrieve user
       const userId = order.user_id;
 
       const User = await userModel.findOne({ _id: userId });
-      console.log("cancel ***********************", userModel);
 
       // Update user's wallet balance (if payment method is 'onlinePayment')
 
       if (User.wallet) {
-        console.log("wallet", User.wallet);
         User.wallet += order.total_amount;
       } else {
         User.wallet = order.total_amount;
       }
       await User.save(); // Save updated user object
     } catch (err) {
-      console.log("helper cancel error");
       console.error(err);
     }
   },
@@ -621,7 +603,6 @@ module.exports = {
           var discountAmount = {};
           discountAmount.status = false;
           discountAmount.cpMsg = "coupon already used";
-          console.log("coupon alredy used");
           return discountAmount;
         }
         let currentDate = new Date();

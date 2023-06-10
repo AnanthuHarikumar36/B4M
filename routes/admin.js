@@ -10,6 +10,7 @@ const {isloggedInad, isLoggedin}=require("../middleware/sessionHandle")
 
 //**home page */
 router.get('/',isloggedInad,adminController.adminlogin)
+router.get('/dashboard',isloggedInad,adminController.dashBoard)
 
 
 //**login logout */

@@ -190,7 +190,6 @@ module.exports = {
         twilioFunctions
           .generateOTP(mobNumber, "sms")
           .then((verification) => {
-            console.log(req.body);
             res.render("../views/user/otp-verify-password", {
               number: mobNumber,
             });
@@ -219,7 +218,6 @@ module.exports = {
   },
   changePassword: (req, res) => {
     try {
-      console.log("page render");
       res.render("../views/user/changePassword", { phone });
     } catch (error) {}
   },
@@ -234,12 +232,9 @@ module.exports = {
   },
   verifyOtpforpassword: async (req, res) => {
     let mobNumber = req.body.number;
-    console.log(mobNumber);
     try {
       const validUser = await userHelpers.getmobileNumber(mobNumber);
       const enterOTP = req.body.code;
-      console.log("tt", enterOTP);
-      console.log("dd", mobNumber);
       twilioFunctions.client.verify.v2
         .services(twilioFunctions.verifySid)
         .verificationChecks.create({ to: `+91${mobNumber}`, code: enterOTP })
@@ -249,18 +244,15 @@ module.exports = {
             req.session.userName = validUser.name;
             req.session.loggedin = true;
             if (req.session.user) {
-              console.log("working");
               phone = mobNumber;
               res.redirect("/changePassword");
             }
           } else {
-            console.log("wssssssorking");
 
             res.render("../views/user/otp-verify");
           }
         })
         .catch((err) => {
-          console.log("wzsdfagwgrgorking");
           console.log(err);
           res.status(500).send("internal server error");
         });
@@ -276,8 +268,6 @@ module.exports = {
     }
     try {
       const mobNumber = req.query.mobile;
-      console.log(mobNumber);
-
       if (!mobNumber) {
         return res.render("../views/user/verify-otp-forPassword", {
           status: "error",
@@ -311,13 +301,9 @@ module.exports = {
 
         var products = await userHelpers.getProductDetails(slug, user?._id);
 
-        console.log("product list view success");
-
         res.render("user/product-view", { user, products });
       } else {
         var products = await userHelpers.getProductDetails(slug, user?._id);
-
-        console.log("product list view success");
 
         res.render("user/product-view", { user, products });
       }
@@ -360,9 +346,6 @@ module.exports = {
     let user_id = req.body.user_id;
     const productId = req.body.productId;
     const count = req.body.quantityChange;
-    console.log(user_id);
-    console.log(productId);
-    console.log(count);
 
     try {
         const response = await userHelpers.updateQuantity(user_id, productId, count);
@@ -389,7 +372,6 @@ module.exports = {
       let user = req.session.user;
       const items = await userHelpers.getCartProducts(req.session.user._id);
       const address = await userHelpers.getDefaultAddress(req.session.user._id);
-      console.log("adress not get", address);
       const { cartItems: products, subtotal } = items;
       res.render("../views/user/checkout", {
         user,
@@ -416,7 +398,6 @@ module.exports = {
         message,
         razorpaySecret
       ).toString(CryptoJS.enc.Hex);
-      console.log(razorpaySignature, "===", generatedSignature);
 
       // Compare the generated signature with the received signature
       if (generatedSignature === generatedSignature) {
@@ -438,9 +419,7 @@ module.exports = {
   },
   placeOrderPost: async (req, res) => {
     try {
-      console.log(req.body, "booooodyyy");
       const { userId, paymentMethod, totalAmount, couponCode } = req.body;
-      console.log(paymentMethod, "paymentMethod");
       const response = await userHelpers.placeOrder(
         userId,
         paymentMethod,
@@ -517,6 +496,7 @@ module.exports = {
       const orderHistory = await userHelpers.getOrderHistory(
         req.session.user._id
       );
+      console.log(orderHistory,"order details");
       const orderDetails = orderHistory.reverse();
       res.render("../views/user/order", {
         user: req.session.user,
@@ -534,8 +514,6 @@ module.exports = {
     try {
       const currentOrder = await adminHelper.getSpecificOrder(req.params.id);
       const { productDetails, order} = currentOrder;
-     
-      
       res.render("../views/user/view-order", {
         user: req.session.user,
         productDetails,
@@ -557,12 +535,9 @@ module.exports = {
   },
   removeOrder: async (req, res) => {
     try {
-      console.log(req.body);
       await userHelpers.cancelOrder(req.body.orderid);
-      console.log("req.body.argument[0]", req.body.arguments[0]);
       res.json('status:"success"');
     } catch (err) {
-      console.log("order cancel error");
       res.render("../views/user/catchError", {
         message: err.message,
         user: req.session.uesr,
@@ -592,13 +567,11 @@ module.exports = {
     try {
       const totalAmount = req.body.total;
       const couponCode = req.body.code;
-      console.log(req.body.total, req.body.code, "koooooi");
       let couponDetails = await userHelpers.applyCoupon(
         couponCode,
         totalAmount,
         req.session.user._id
       );
-      console.log(couponDetails, "cpdetails");
       res.json({ couponDetails });
     } catch (error) {
       console.log(error);
@@ -625,7 +598,6 @@ module.exports = {
         user: req.session.user,
         showList,
       });
-      console.log(showList, "wishlist pproduct details");
     } catch (err) {
       console.error(err);
       res.render("../views/user/catchError", {
@@ -747,7 +719,6 @@ module.exports = {
   filterProducts: async (req, res) => {
     try {
       const { sort } = req.query;
-      console.log(sort);
       const products = await userHelpers.sortQuery(sort, req.session.user?._id);
       res.render("../views/user/productList", {
         user: req.session.user,
@@ -763,7 +734,6 @@ module.exports = {
   downloadInvoice: async (req, res) => {
     try {
       const order_id = req.params.id;
-      console.log(order_id);
       // Generate the PDF invoice
       const order = await adminHelpers.getSpecificOrder(order_id);
 
@@ -775,7 +745,6 @@ module.exports = {
       // Download the generated PDF
       res.download(invoicePath, (err) => {
         if (err) {
-          console.error("Failed to download invoice:", err);
           res.render("../views/user/catchError", {
             message: err.message,
             user: req.session.user,
@@ -783,7 +752,6 @@ module.exports = {
         }
       });
     } catch (error) {
-      console.error("Failed to download invoice:", error);
       res.render("catchError", {
         user: req.session.user,
       });

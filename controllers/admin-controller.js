@@ -17,36 +17,44 @@ cloudinary.config({
 module.exports = {
   adminlogin: (req, res) => {
     if (req.session.isloggedInad) {
-      res.render("admin/admin-landingpage");
+      res.render("admin/admin-login");
     } else {
-      res.redirect("/admin");
+      res.redirect("/admin/dashboard");
     }
+  },
+  dashBoard:async (req, res) => {
+    const totalRevenue = await adminHelper.findTotalRevenue();
+    const orders = await adminHelper.getOrderDetails();
+    const orderCount = orders.length;
+    const products = await adminHelper.getAllProducts();
+    const productsCount = products.length;
+    const users = await adminHelper.getAllusers();
+    const usersCount = users.length;
+    const orderData = await adminHelper.orderStatusData();
+    const paymentStatitics = await adminHelper.paymentStatitics();
+  
+      // res.render("admin/admin-landingpage");
+      res.render("../views/admin/admin-landingpage", { adLogErr: false,orderCount,
+        productsCount,
+        usersCount,
+        totalRevenue,
+        orderData,
+        paymentStatitics, });
+   
   },
   adminPostLogin: async (req, res) => {
     try {
         const adminData = await adminHelper.adminlogin(req.body);
         let admin = adminData.status;
-        const totalRevenue = await adminHelper.findTotalRevenue();
-        const orders = await adminHelper.getOrderDetails();
-        const orderCount = orders.length;
-        const products = await adminHelper.getAllProducts();
-        const productsCount = products.length;
-        const users = await adminHelper.getAllusers();
-        const usersCount = users.length;
-        const orderData = await adminHelper.orderStatusData();
-        const paymentStatitics = await adminHelper.paymentStatitics();
+      
 
         if (admin) {
             req.session.isloggedInad = true;
             req.session.admin = adminData.validAdmin;
-            res.render("../views/admin/admin-landingpage", { adLogErr: false,orderCount,
-                productsCount,
-                usersCount,
-                totalRevenue,
-                orderData,
-                paymentStatitics, });
+            res.redirect("/admin/dashboard");
+         
         } else {
-            res.redirect("/admin");
+            res.redirect("/");
         }
     } catch (error) {
         console.error(error);
